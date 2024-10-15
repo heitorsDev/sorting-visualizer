@@ -6,7 +6,7 @@ function genarray(size) {
     for (let i = 0; i < size; i++) {
         let num = 0
         while (array.includes(num)) {
-            num = Math.floor(Math.random() * 100)
+            num = Math.floor(Math.random() * size)
         }
         array.push(num)
     }
@@ -21,17 +21,16 @@ async function displayarray(array, selected) {
         let atualString = ""
         let numDisplay = (array[i] / array.length) * 100
         if (selected != i) {
-            atualString = `<div class="bar" style="width: ${array.length / 100}vw ;height: ${numDisplay}vh;"></div>`
+            atualString = `<div class="bar" style="width: ${100/array.length}vw ;height: ${numDisplay}vh;"></div>`
         } else {
-            atualString = `<div class="bar" style="width: ${array.length / 100}vw ;height: ${numDisplay}vh; background-color: red"></div>`
+            atualString = `<div class="bar" style="width: ${100/array.length}vw ;height: ${numDisplay}vh; background-color: red"></div>`
         }
         string += atualString
 
     }
     DOMdisplay.innerHTML = string
 }
-let array = genarray(100)
-async function iteractionBubble() {
+async function iteractionBubble(array) {
     let changes = 0
     for (let i = 0; i < array.length - 1; i++) {
         if (array[i] > array[i + 1]) {
@@ -46,9 +45,9 @@ async function iteractionBubble() {
 
     }
     if (changes != 0) {
-        return iteractionBubble()
+        return iteractionBubble(array)
     } else {
-        for (let a = 0; a<2; a++){
+        for (let a = 0; a<1; a++){
             for (let i = 0; i < array.length - 1; i++) {
 
                 displayarray(array, i+1)
@@ -60,5 +59,13 @@ async function iteractionBubble() {
 
     }
 }
-displayarray(array)
-iteractionBubble()
+
+function runSort(){
+    let size = document.getElementById("size").value
+    let type = document.getElementById("algo").value
+    let array = genarray(size)
+    switch (type){
+        case "bubble":
+            iteractionBubble(array)
+    }
+}

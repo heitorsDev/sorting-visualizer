@@ -21,10 +21,25 @@
             background-color: #ffffff;
             display: block;
         }
-
+        .menu{
+            position: absolute;
+            background-color: black;
+            width: 300px;
+            height: 200px;
+            color: white;
+            outline: solid 2px white;
+        }
     </style>
 </head>
 <body>
+    <div class="menu">
+        <span>array size: </span><input type="number" id="size">
+        <span>algorithm: </span><select name="algo" id="algo">
+            <option value="bubble">bubble sort</option>
+        </select>
+        <br>
+        <button onclick="runSort()">run</button>
+    </div>
     <div id="display" class="container-geral">
 
     </div>
